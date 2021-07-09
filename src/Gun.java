@@ -9,6 +9,7 @@ public class Gun implements Serializable{
 	private double caliber;
 	private int magazineSize;
 	private double weight;
+	private int numberOf;
 
 	public enum Type{
 		Shogun,
@@ -18,7 +19,7 @@ public class Gun implements Serializable{
 	
 	private Type type;
 	
-	public Gun(String name, int version, double caliber, int magazineSize, double weight, Gun.Type type) {
+	public Gun(String name, int version, double caliber, int magazineSize, double weight, Gun.Type type, int numberOf) {
 		
 		this.name = name;
 		this.version = version;
@@ -26,6 +27,7 @@ public class Gun implements Serializable{
 		this.magazineSize = magazineSize;
 		this.weight = weight;
 		this.type = type;
+		this.numberOf = numberOf;
 	}
 	
 	public String getName() {
@@ -76,10 +78,20 @@ public class Gun implements Serializable{
 		
 		this.type = type;
 	}
+	
+	public int getNumberOf() {
+		
+		return numberOf;
+	}
+	
+	public void setNumberOf(int numberOf) {
+		
+		this.numberOf = numberOf;
+	}
 
 	@Override
 	public String toString() {
 		
-		return name + "-" + version + "_" + caliber;
+		return name + "-" + version + " cal " + caliber + "mm";
 	}
 }

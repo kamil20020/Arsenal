@@ -1,5 +1,4 @@
 import java.util.InputMismatchException;
-import java.util.List;
 import java.util.Scanner;
 
 public class GunService {
@@ -69,17 +68,6 @@ public class GunService {
 			
 			System.out.print("Wprowadzono nieprawidlowy typ broni: ");
 		}
-	}
-
-	public static boolean showGuns(List <Gun> guns) {
-		
-		if(guns == null)
-			return false;
-		
-		for(Gun g : guns)
-			System.out.println(g);
-		
-		return true;
 	}
 	
 	public static Gun.Type validateGunType(String gunType) {

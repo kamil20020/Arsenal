@@ -1,5 +1,4 @@
 import java.util.ArrayList;
-import java.util.InputMismatchException;
 import java.util.List;
 import java.util.Scanner;
 
@@ -29,10 +28,14 @@ public class App {
 		System.out.print("Prosze wprowadzic typ broni (Shogun, Pistol, Rifle): ");
 		Gun.Type gunType = GunService.inputGunType(input);
 		
+		System.out.print("Prosze wprowadzic liczbe broni: ");
+		int numberOf = GunService.inputInt(input, true); 
+		
+		
 		if(guns == null)
 			guns = new ArrayList<>();
 		
-		guns.add(new Gun(name, version, caliber, magazineSize, weight, gunType));
+		guns.add(new Gun(name, version, caliber, magazineSize, weight, gunType, numberOf));
 	}
 	
 	private void editGun() {
@@ -60,6 +63,62 @@ public class App {
 		
 		guns = FileExceptionsHandling.readObjectExceptionHandling(filePath);
 	}
+	
+	private void showGuns() {
+		
+		for(Gun g : guns)
+			System.out.println(g);
+	}
+	
+	private void specificShowGuns() {
+		
+		System.out.println("Nazwa\t Wersja \t Kaliber(mm) \t Rozmiar magazynka \t"
+				+ 		   "Waga(g) \t Typ \t Liczba sztuk");
+		
+		for(Gun g : guns) {
+			
+			System.out.println(g.getName() + "\t   " + g.getVersion() + "\t\t    " + g.getCaliber() + 
+							   "\t\t\t" + g.getMagazineSize() + "\t\t" + g.getWeight() + "\t\t" +
+								g.getType() + "\t\t" + g.getNumberOf());
+		}
+	}
+	
+	private void showGunsMenu() {
+		
+		if(guns == null) {
+			
+			System.out.println("Kolekcja jest pusta");
+			return;
+		}
+		
+		String menu = "\nOpcje:\n"
+				+ 	  "generally - ogolne informacje\n"
+				+ 	  "specifically - szczegolowe informacje\n";
+		
+		System.out.println(menu);
+		
+		System.out.print("Wprowadz odpowiednia komende: ");
+		String command = input.next();
+		
+		System.out.print(System.lineSeparator());
+		
+		switch(command) {
+		
+			case "generally":
+				
+				showGuns();
+				break;
+			
+			case "specifically":
+				
+				specificShowGuns();
+				break;
+			
+			default:
+				
+				System.out.println("Wprowadzono niepoprawna komende");
+		}
+	}
 
 	public void run() {
 		
@@ -86,9 +145,7 @@ public class App {
 			
 				case "show":
 					
-					if(!GunService.showGuns(guns))
-						System.out.println("Nie ma w bazie zadnych broni");
-					
+					showGunsMenu();
 					break;
 					
 				case "add":
