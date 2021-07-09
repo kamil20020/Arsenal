@@ -18,7 +18,7 @@ public class Gun implements Serializable{
 	
 	private Type type;
 	
-	public Gun(String name, int version, double caliber, int magazineSize, double weight, Type type) {
+	public Gun(String name, int version, double caliber, int magazineSize, double weight, Gun.Type type) {
 		
 		this.name = name;
 		this.version = version;
@@ -76,7 +76,7 @@ public class Gun implements Serializable{
 		
 		this.type = type;
 	}
-	
+
 	@Override
 	public String toString() {
 		

@@ -9,6 +9,8 @@ public class FileExceptionsHandling {
 		try {
 			
 			FileService.saveObject(obj, filePath);
+			
+			System.out.println("Poprawnie zapisano do pliku");
 		}
 		catch (IOException e) {
 			
@@ -20,7 +22,11 @@ public class FileExceptionsHandling {
 		
 		try {
 			
-			return FileService.readObject(filePath);
+			T readedT =  FileService.readObject(filePath);
+			
+			System.out.println("Poprawnie odczytano z pliku");
+			
+			return readedT;
 		}
 		catch(FileNotFoundException e) {
 			
@@ -47,6 +53,8 @@ public class FileExceptionsHandling {
 		try {
 			
 			FileService.saveText(lines, filePath);
+			
+			System.out.println("Poprawnie zapisano do pliku");
 		}
 		catch(IOException e) {
 			
@@ -58,7 +66,11 @@ public class FileExceptionsHandling {
 		
 		try {
 			
-			return FileService.readText(filePath);
+			List <String> readedList = FileService.readText(filePath);
+			
+			System.out.println("Poprawnie odczytano z pliku");
+			
+			return readedList;
 		}
 		catch(FileNotFoundException e) {
 			
