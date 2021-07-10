@@ -30,6 +30,16 @@ public class Gun implements Serializable{
 		this.numberOf = numberOf;
 	}
 	
+	public void setVersion(int version) {
+		
+		this.version = version;
+	}
+	
+	public void setName(String name) {
+		
+		this.name = name;
+	}
+	
 	public String getName() {
 		
 		return name;
@@ -45,7 +55,7 @@ public class Gun implements Serializable{
 		return caliber;
 	}
 
-	public void setCaliber(float caliber) {
+	public void setCaliber(double caliber) {
 		
 		this.caliber = caliber;
 	}
@@ -87,6 +97,37 @@ public class Gun implements Serializable{
 	public void setNumberOf(int numberOf) {
 		
 		this.numberOf = numberOf;
+	}
+	
+	public static String getString(String name, int version, double caliber) {
+		
+		return name + "-" + version + " cal " + caliber + "mm";
+	}
+	
+	@Override
+	public boolean equals(Object obj) {
+		
+		if(obj == null)
+			return false;
+		
+		if(obj == this)
+			return true;
+		
+		if(!(obj instanceof Gun))
+			return false;
+		
+		Gun otherGun = (Gun) obj;
+		
+		if(name.equals(otherGun.name) && version == otherGun.version && caliber == otherGun.caliber)
+			return true;
+		
+		return false;
+	}
+	
+	@Override
+	public int hashCode() {
+		
+		return 17*name.hashCode() + 31*version + 7*Double.valueOf(caliber).hashCode();
 	}
 
 	@Override

@@ -40,12 +40,107 @@ public class App {
 	
 	private void editGun() {
 		
-		System.out.println("Nie zaimplementowano");
+		Gun gun = find();
+		
+		if(gun == null) {
+			
+			System.out.println("Nie istnieje taki zasob");
+			return;
+		}
+		
+		String options = "\nOpcje:\n"
+				+ 		 "name - Nazwa\n"
+				+ 		 "version - Wersja\n"
+				+ 		 "caliber - Kaliber\n"
+				+ 		 "magazine - Rozmiar magazynka\n"
+				+ 		 "type - Typ broni\n"
+				+ 		 "number of - Liczba broni\n";
+		
+		System.out.println(options);
+		System.out.println("Wprowadz odpowiednia kategorie ktora ma byc zmieniona: ");
+		
+		String category = input.next();
+		
+		System.out.println("Wprowadz wartosc: ");
+		
+		switch(category) {
+		
+			case "name":
+				
+				gun.setName(input.next());
+				break;
+			
+			case "version":
+				
+				gun.setVersion(GunService.inputInt(input, true));
+				break;
+				
+			case "caliber":
+	
+				gun.setCaliber(GunService.inputDouble(input, true));
+				break;
+				
+			case "magazine":
+	
+				gun.setMagazineSize(GunService.inputInt(input, true));
+				break;
+				
+			case "type":
+				
+				gun.setType(GunService.inputGunType(input));
+				break;
+			
+			case "number of":
+	
+				gun.setNumberOf(GunService.inputInt(input, true));
+				break;
+			
+			default:
+				System.out.println("Wprowadzono niepoprawna kategorie");
+		}
+	}
+	
+	private Gun find() {
+		
+		if(guns == null) {
+			
+			System.out.println("Kolekcja broni jest pusta");
+			return null;
+		}
+		
+		System.out.print("Podaj nazwe zasobu: ");
+		String name = input.next();
+		
+		System.out.print("Podaj wersje zasobu: ");
+		int version = GunService.inputInt(input, true);
+		
+		System.out.print("Podaj kaliber broni: ");
+		double caliber = GunService.inputDouble(input, true);
+		
+		String id = Gun.getString(name, version, caliber);
+		
+		for(Gun g : guns) {
+			
+			if(g.toString().equals(id))
+				return g;
+		}
+		
+		return null;
 	}
 	
 	private void removeGun() {
 		
-		System.out.println("Nie zaimplementowano");
+		Gun gun = find();
+		
+		if(gun != null) {
+		
+			guns.remove(gun);
+			
+			System.out.println("Udalo sie usunac zasob");
+		}
+		else
+			System.out.println("Taki zasob nie istnieje");
+		
 	}
 	
 	private void saveGun() {
